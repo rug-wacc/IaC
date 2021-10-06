@@ -12,3 +12,31 @@ passwd:
     - name: core
       ssh_authorized_keys:
         - ${sshkey}
+
+# This starts the very simple Docker container
+systemd:
+  units:
+    # Ensure docker starts automatically instead of being socket-activated
+    - name: docker.socket
+      enabled: false
+    - name: docker.service
+      enabled: true
+
+    # Docker container started as a systemd service
+    - name: helloworld.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Hello World
+        After=docker.service
+        Requires=docker.service
+
+        [Service]
+        TimeoutStartSec=0
+        ExecStartPre=-/usr/bin/docker kill helloworld
+        ExecStartPre=-/usr/bin/docker rm helloworld
+        ExecStartPre=/usr/bin/docker pull ${imagename}
+        ExecStart=/usr/bin/docker run --name helloworld -p 80:80 ${imagename}
+
+        [Install]
+        WantedBy=multi-user.target

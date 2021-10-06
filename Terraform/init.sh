@@ -9,6 +9,11 @@ then
     cp secrets.auto.tfvars.json.example secrets.auto.tfvars.json
 fi
 
+if [ ! -f "locals.auto.tfvars.json" ]
+then
+    cp locals.auto.tfvars.json.example locals.auto.tfvars.json
+fi
+
 if [ ! -f "id_rsa" ]
 then
     ssh-keygen -b 4096 -t rsa -f ./id_rsa -q -N ""

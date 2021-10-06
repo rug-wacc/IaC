@@ -11,5 +11,6 @@ data "ct_config" "flatcar" {
     content = templatefile("${path.module}/flatcar_config.yaml", {
         # Use these values to fill the template
         sshkey = file("${path.module}/id_rsa.pub")
+        imagename = var.imagename
     })
 }

@@ -21,3 +21,8 @@ variable "openstack_projectname" {
     description = "OpenStack Project Name"
     sensitive = true
 }
+
+variable "imagename" {
+    type = string
+    description = "Image name of the Docker Image"
+}
