@@ -15,13 +15,14 @@ terraform {
 
 # Configuration for OpenStack provider
 provider "openstack" {
-    auth_url = "https://merlin.hpc.rug.nl:5000/v3/"
-    user_domain_name = "Default"
+    auth_url = var.openstack_url
 
-    
+    user_domain_name = var.openstack_domainname
+    user_domain_id = var.openstack_domainid
+
+    region = var.openstack_region
     user_name = var.openstack_username
     password = var.openstack_password
     
     tenant_id = var.openstack_projectid
-    tenant_name = var.openstack_projectname
 }

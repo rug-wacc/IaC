@@ -1,6 +1,6 @@
-# State
 .terraform
 *.tfstate*
 *.tfvars.json
 id_rsa*
 *.img
+*openrc*
